@@ -7,11 +7,12 @@ trait PlayListServices {
 
   def save(playLists: util.ArrayList[PlayList]);
 
-  def exportCsv(playLists: util.ArrayList[PlayList], path: String, fileName: String);
-
   def findById(id: Long): PlayList
 
-  def findAll(): util.ArrayList[PlayList]
+  def findAll(): util.List[PlayList]
 
-  def findAllPlayList(): util.ArrayList[String]
+  def findAllPlayList(): util.List[String]
+
+  def exportCsv(playLists: util.ArrayList[PlayList], path: String, fileName: String);
+
 }
