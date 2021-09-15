@@ -4,8 +4,8 @@ import com.scalaspark.config.{H2JDBCConfiguration, SparkConfiguration}
 import com.scalaspark.models.PlayList
 import com.scalaspark.services.{PlayListServicesImpl, SparkServices}
 import org.apache.spark.sql.{Dataset, Encoders}
-import org.junit.Assert.{assertTrue}
-import org.junit.{AfterClass, Before, BeforeClass, Test}
+import org.junit.Assert.assertTrue
+import org.junit.{After, AfterClass, Before, BeforeClass, Test}
 
 import java.util
 
@@ -15,20 +15,16 @@ class PlayListRepositoryImplTest {
 
   private val playListServices: PlayListServicesImpl = null
 
-  @BeforeClass
-  @Test
-  def setUpClass(): Unit = {
-    new SparkConfiguration().init()
-  }
-
   @Before
   def setUp(): Unit = {
+    new SparkConfiguration().init()
     this.spark = new SparkServices
-    new H2JDBCConfiguration().deleteTable()
+
   }
 
-  @AfterClass def cleanUp(): Unit = {
-    new H2JDBCConfiguration().dropTable()
+  @After
+  def cleanUp(): Unit = {
+    H2JDBCConfiguration.deleteTable()
   }
 
   @Test def mustSaveAPlayList(): Unit = {

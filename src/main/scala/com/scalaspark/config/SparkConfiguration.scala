@@ -13,7 +13,7 @@ class SparkConfiguration {
   def init(): Unit = {
     val spark = new SparkServices().connect
     //PRIMEIRO CRIAMOS A TABELA NA MEMÓRIA H2
-    new H2JDBCConfiguration().createTable()
+    H2JDBCConfiguration.createTable()
     //AQUI EM FRENTE VAMOS FAZER COM QUE O SPARK ENCHERGUE
     //E ENTÃO LOGO EM SEGUIDA PODEREMOS CRIAR NOSSA TABELA
     //COM O SPARK
