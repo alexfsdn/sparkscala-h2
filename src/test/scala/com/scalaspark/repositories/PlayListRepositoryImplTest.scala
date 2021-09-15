@@ -4,7 +4,7 @@ import com.scalaspark.config.{H2JDBCConfiguration, SparkConfiguration}
 import com.scalaspark.models.PlayList
 import com.scalaspark.services.{PlayListServicesImpl, SparkServices}
 import org.apache.spark.sql.{Dataset, Encoders}
-import org.junit.Assert.{assertEquals, assertTrue}
+import org.junit.Assert.{assertTrue}
 import org.junit.{AfterClass, Before, BeforeClass, Test}
 
 import java.util

@@ -1,10 +1,9 @@
 package com.scalaspark.config
 
-import com.scalaspark.config.H2JDBCConfiguration
 
 import java.sql.{Connection, DriverManager, SQLException}
 
-class H2JDBCConfiguration {
+object H2JDBCConfiguration {
   private val jdbcURL = "jdbc:h2:~/test"
   private val jdbcUsername = "sa"
   private val jdbcPassword = ""
@@ -14,15 +13,14 @@ class H2JDBCConfiguration {
   private val deleteTableSQL = "delete from play_list;"
 
   def getConnection: Connection = {
-    var connection = null
     try {
-      connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword)
-    }
-    catch {
+      val connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword)
+      connection
+    } catch {
       case e: SQLException =>
         e.printStackTrace()
+        null
     }
-    connection
   }
 
   def dropTable(): Unit = {
