@@ -1,6 +1,7 @@
 package com.scalaspark.repositories
 
 import com.scalaspark.config.{H2JDBCConfiguration, SparkConfiguration}
+import com.scalaspark.enums.{FormatEnums, TableEnums}
 import com.scalaspark.models.PlayList
 import com.scalaspark.services.{PlayListServicesImpl, SparkServices}
 import org.apache.spark.sql.{Dataset, Encoders}
@@ -12,14 +13,19 @@ import java.util
 class PlayListRepositoryImplTest {
 
   private var spark: SparkServices = null
-
-  private val playListServices: PlayListServicesImpl = null
+  private var playListServices: PlayListServicesImpl = null
 
   @Before
   def setUp(): Unit = {
     new SparkConfiguration().init()
     this.spark = new SparkServices
 
+    val dataBase = ""
+    val table = TableEnums.play_list.toString
+    val format = FormatEnums.ORC.toString
+
+    val repository = new PlayListRepositoryImpl(this.spark, dataBase, table, format)
+    playListServices = new PlayListServicesImpl(this.spark, repository)
   }
 
   @After
@@ -28,8 +34,8 @@ class PlayListRepositoryImplTest {
   }
 
   @Test def mustSaveAPlayList(): Unit = {
-    val playList: PlayList = new PlayList(1L, "the best Northlane")
-    val playList2: PlayList = new PlayList(2L, "the best Stone Sour")
+    val playList: PlayList = new PlayList(1, "the best Northlane")
+    val playList2: PlayList = new PlayList(2, "the best Stone Sour")
 
     val playLists: util.ArrayList[PlayList] = new util.ArrayList[PlayList]()
     playLists.add(playList)
@@ -41,8 +47,8 @@ class PlayListRepositoryImplTest {
   }
 
   @Test def mustFindAllPlayListOfString(): Unit = {
-    val playList: PlayList = new PlayList(1L, "the best Northlane")
-    val playList2: PlayList = new PlayList(2L, "the best Stone Sour")
+    val playList: PlayList = new PlayList(1, "the best Northlane")
+    val playList2: PlayList = new PlayList(2, "the best Stone Sour")
 
     val playLists: util.ArrayList[PlayList] = new util.ArrayList[PlayList]()
     playLists.add(playList)

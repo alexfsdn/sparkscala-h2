@@ -1,5 +1,6 @@
 package com.scalaspark.config
 
+import com.scalaspark.enums.TableEnums
 import com.scalaspark.services.SparkServices
 
 import java.util.Properties
@@ -8,7 +9,7 @@ class SparkConfiguration {
   private val jdbcURL = "jdbc:h2:~/test"
   private val jdbcUsername = "sa"
   private val jdbcPassword = ""
-  private val table = "play_list"
+  private val table = TableEnums.play_list.toString
 
   def init(): Unit = {
     val spark = new SparkServices().connect
