@@ -4,11 +4,11 @@ package com.scalaspark.config
 import java.sql.{Connection, DriverManager, SQLException}
 
 object H2JDBCConfiguration {
-  private val jdbcURL = "jdbc:h2:~/test"
+  private val jdbcURL = "jdbc:h2:~/testscala"
   private val jdbcUsername = "sa"
   private val jdbcPassword = ""
 
-  private val createTableSQL = "create table play_list (id int, name varchar(50));"
+  private val createTableSQL = "create table play_list (ID int, NAME varchar(50));"
   private val dropTableSQL = "drop table if exists play_list;"
   private val deleteTableSQL = "delete from play_list;"
 

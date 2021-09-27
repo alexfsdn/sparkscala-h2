@@ -3,7 +3,9 @@ package com.scalaspark.repositories
 import com.scalaspark.enums.PlayListEnums
 import com.scalaspark.models.PlayList
 import com.scalaspark.services.SparkServices
+import org.apache.arrow.vector.ipc.JsonFileWriter.JSONWriteConfig
 import org.apache.spark.sql.Encoders
+import org.apache.spark.sql.functions.col
 
 import java.util
 
@@ -12,8 +14,11 @@ class PlayListRepositoryImpl(sparkServices: SparkServices, dataBase: String, tab
   override def save(playLists: util.ArrayList[PlayList]): Unit = {
     val spark = sparkServices.connect
     import spark.implicits._
-    val dataset = spark.createDataFrame(playLists, classOf[PlayList])
-    dataset.write.format(format).insertInto(dataBase.concat(table))
+
+    val playLs = spark.createDataset(playLists)
+    playLs.show()
+    playLs.select(col(PlayListEnums.ID.toString), col(PlayListEnums.NAME.toString))
+      .write.format(format).mode("append").insertInto(dataBase.concat(table))
   }
 
   override def findById(id: Long): PlayList = {
@@ -26,7 +31,7 @@ class PlayListRepositoryImpl(sparkServices: SparkServices, dataBase: String, tab
   override def findAll(): util.List[PlayList] = {
     val spark = sparkServices.connect
     import spark.implicits._
-    val playLists = spark.sql("select " + PlayListEnums.ID + ", " + PlayListEnums.NAME + " from " + dataBase.concat(table)).dropDuplicates.as(Encoders.bean(classOf[PlayList])).collectAsList
+    val playLists = spark.sql("select " + PlayListEnums.ID.toString + ", " + PlayListEnums.NAME.toString + " from " + dataBase.concat(table)).dropDuplicates.as(Encoders.bean(classOf[PlayList])).collectAsList()
     playLists
   }
 

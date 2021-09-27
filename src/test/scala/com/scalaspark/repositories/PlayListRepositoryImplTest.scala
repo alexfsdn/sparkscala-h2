@@ -6,7 +6,7 @@ import com.scalaspark.models.PlayList
 import com.scalaspark.services.{PlayListServicesImpl, SparkServices}
 import org.apache.spark.sql.{Dataset, Encoders}
 import org.junit.Assert.assertTrue
-import org.junit.{After, AfterClass, Before, BeforeClass, Test}
+import org.junit.{After, Before, Test}
 
 import java.util
 

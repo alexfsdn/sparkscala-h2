@@ -6,7 +6,7 @@ import com.scalaspark.services.SparkServices
 import java.util.Properties
 
 class SparkConfiguration {
-  private val jdbcURL = "jdbc:h2:~/test"
+  private val jdbcURL = "jdbc:h2:~/testscala"
   private val jdbcUsername = "sa"
   private val jdbcPassword = ""
   private val table = TableEnums.play_list.toString
@@ -25,6 +25,9 @@ class SparkConfiguration {
     connectionProperties.put("password", jdbcPassword)
     val jdbcH2DF = spark.read.jdbc(jdbcURL, table, connectionProperties)
     jdbcH2DF.createOrReplaceTempView(table)
+
+    System.out.println("PRINT SCHEMA!!!!")
+    jdbcH2DF.printSchema()
   }
 
 }
