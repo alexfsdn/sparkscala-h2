@@ -15,11 +15,11 @@ class PlayListServicesImpl(sparkServices: SparkServices, playListRepository: Pla
     playListRepository.findById(id)
   }
 
-  override def findAll(): util.List[PlayList] = {
+  override def findAll(): List[PlayList] = {
     playListRepository.findAll()
   }
 
-  override def findAllPlayList(): util.List[String] = {
+  override def findAllPlayList(): List[String] = {
     playListRepository.findAllPlayList()
   }
 

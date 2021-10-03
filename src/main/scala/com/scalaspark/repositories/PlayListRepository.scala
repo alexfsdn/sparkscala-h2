@@ -9,8 +9,8 @@ trait PlayListRepository {
 
   def findById(id: Long): PlayList
 
-  def findAll(): util.List[PlayList]
+  def findAll(): List[PlayList]
 
-  def findAllPlayList(): util.List[String]
+  def findAllPlayList(): List[String]
 
 }

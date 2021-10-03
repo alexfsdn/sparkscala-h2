@@ -9,9 +9,9 @@ trait PlayListServices {
 
   def findById(id: Long): PlayList
 
-  def findAll(): util.List[PlayList]
+  def findAll(): List[PlayList]
 
-  def findAllPlayList(): util.List[String]
+  def findAllPlayList(): List[String]
 
   def exportCsv(playLists: util.ArrayList[PlayList], path: String, fileName: String);
 

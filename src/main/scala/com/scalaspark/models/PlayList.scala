@@ -1,5 +1,8 @@
 package com.scalaspark.models
 
-case class PlayList(id:Int, name:String) {
+case class PlayList(id: Int, name: String) {
 
+}
+
+object PlayList {
 }
